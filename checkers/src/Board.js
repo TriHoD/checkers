@@ -1,34 +1,35 @@
 import React from 'react';
+import * as utils from './utils.js';
 
 function Square(props) {
 
-    const squareClassees = props['squareClasses'];
+    const squareClasses = props['squareClasses'];
     const onClick = props['onClick'];
 
     return (
-        <button className = { "square" + (squareClassees) } onClick={onClick} />
+        <button className = { "square " + (squareClasses) } onClick={onClick} />
     );
 }
 
 export default class Board extends React.Component {
-    
-    renderSquare(coordinates, squareClassees) {
+
+    renderSquare(coordinates, squareClasses) {
         return (
             <Square
                 key = {coordinates}
-                squareClassees = {squareClassees}
+                squareClasses = {squareClasses}
                 onClick = {() => this.props.onClick(coordinates) }
             />
         );
     }
 
-    redner() {
+    render() {
         let boardRender = [];
         let columnsRender = [];
 
-        const moves = this.props.move;
-        
-        for(let coordinates in this.props.boardState) {
+        const moves = this.props.moves;
+
+        for (let coordinates in this.props.boardState) {
 
             if (!this.props.boardState.hasOwnProperty(coordinates)) {
                 continue;
@@ -76,4 +77,4 @@ export default class Board extends React.Component {
 
         return (boardRender);
     }
-};
+}
